@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\__Scripts\Dock.cs" />
+    <Compile Include="Assets\__Scripts\DockSpawner.cs" />
     <Compile Include="Assets\__Scripts\Enemy.cs" />
     <Compile Include="Assets\__Scripts\FallingBehaviour.cs" />
     <Compile Include="Assets\__Scripts\GameController.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="Assets\__Scripts\PointSpawner.cs" />
     <Compile Include="Assets\__Scripts\SpawnPoint.cs" />
     <Compile Include="Assets\__Scripts\Utilities\ListUtility.cs" />
+    <Compile Include="Assets\__Scripts\WaypointFollower.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/123ki/Documents/GitHub/MobileApp3/MobileApp3/LabExercise/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
