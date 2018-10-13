@@ -3,41 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour {
-    // use the arrow keys for movement.
+
+    // constants
     private const string H_AXIS = "Horizontal";
     private const string V_AXIS = "Vertical";
 
+    // fields
+    // make available in the unity to test
     [SerializeField]
     private float speed = 15f;
-
     [SerializeField]
-    private float xMin = -1.95f;
-
+    private float xMin = -1.9f;
     [SerializeField]
-    private float xMax = 1.95f;
+    private float xMax = 1.9f;
 
-    Rigidbody2D rb;
-    // Use this for initialization
+    private Rigidbody2D rb;
+	// Use this for initialization
 	void Start () {
+        // get the current object
         rb = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
+	// Update is called once per view frame
 	void Update () {
-		// Frames Per Second - 25 PAL 30 NTSC
+		
 	}
+    // update with the physics engine
     private void FixedUpdate()
     {
+        //        Input.GetKey(KeyCode.UpArrow )
+
+        // get movement on the axes
         float hMovement = Input.GetAxis(H_AXIS);
         float vMovement = Input.GetAxis(V_AXIS);
-        rb.velocity = new Vector2(hMovement * speed, 
+        // get the current body and change the velocity
+        // using the horizontal movement * speed value
+        rb.velocity = new Vector2(hMovement * speed,
                                 vMovement * speed);
-        // keep with the boundaries
-        // get the position of the boundary objects
-        // work out the x value - do the maths
-        // or use Mathf.Clamp
-        float newX = Mathf.Clamp(rb.position.x, xMin, xMax);
-        // have newX value, need to reposition rb
-        rb.position = new Vector2(newX, rb.position.y);
+
+        // Mathf.Clamp
+        // work out the xValue based on the limits
+        float xValue = Mathf.Clamp(rb.position.x, xMin, xMax);
+
+        /*
+         * float xValue = Mathf.Clamp01(rb.position.x);
+         */
+        // keep position.x between two values
+        rb.position = new Vector2(xValue, rb.position.y);
+
+
+
+
+
     }
 }
