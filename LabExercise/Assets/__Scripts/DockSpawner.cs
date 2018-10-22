@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 public class DockSpawner : MonoBehaviour {
 
@@ -8,8 +9,6 @@ public class DockSpawner : MonoBehaviour {
     // needs spawn method, spawndelay, spawn interval
 
     // == constants ==
-    private const string SPAWN_METHOD = "Spawn";
-    private const string ENEMY_PARENT_NAME = "Enemies";
 
     // == fields ==
     [SerializeField]
@@ -30,17 +29,13 @@ public class DockSpawner : MonoBehaviour {
     // == private methods ==
     private void Start()
     {
-        enemyParent = GameObject.Find(ENEMY_PARENT_NAME);
-        if(!enemyParent)
-        {
-            enemyParent = new GameObject(ENEMY_PARENT_NAME);
-        }
+        enemyParent = ParentUtils.FindEnemyParent();
         SpawnRepeating();
     }
 
     private void SpawnRepeating()
     {
-        InvokeRepeating(SPAWN_METHOD,
+        InvokeRepeating(ParentUtils.SPAWN_METHOD,
                         spawnDelay,
                         spawnInterval);
     }

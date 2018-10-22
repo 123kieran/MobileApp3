@@ -7,7 +7,6 @@ using Utilities;
 
 public class PointSpawner : MonoBehaviour {
 
-    private const string SPAWN_METHOD = "Spawn";
     [SerializeField]
     private float spawnDelay = 0.5f;
     [SerializeField]
@@ -21,9 +20,11 @@ public class PointSpawner : MonoBehaviour {
 
     private Stack<SpawnPoint> spawnStack;
 
+    private GameObject enemyParent;
 
 	// Use this for initialization
 	void Start () {
+        enemyParent = ParentUtils.FindEnemyParent();
         // get the list of child object
         spawnPoints = GetComponentsInChildren<SpawnPoint>();
         SpawnEnemiesRepeating();
@@ -33,7 +34,7 @@ public class PointSpawner : MonoBehaviour {
     {
         // shuffle my stack first (from Utilities namespace)
         spawnStack = ListUtility.CreateShuffledStack(spawnPoints);
-        InvokeRepeating(SPAWN_METHOD, spawnDelay, spawnInterval);
+        InvokeRepeating(ParentUtils.SPAWN_METHOD, spawnDelay, spawnInterval);
     }
 
     private void Spawn()
@@ -48,7 +49,7 @@ public class PointSpawner : MonoBehaviour {
 
         var spawnPoint = spawnStack.Pop();
 
-        var enemy = Instantiate(enemyPrefab);
+        var enemy = Instantiate(enemyPrefab, enemyParent.transform);
         // set the position
         enemy.transform.position = spawnPoint.transform.position;
 
